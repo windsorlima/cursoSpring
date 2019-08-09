@@ -14,7 +14,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.windsorlima.cursoSpring.domain.Categoria;
 import com.windsorlima.cursoSpring.services.CategoriaService;
 
-import sun.security.provider.certpath.ResponderId;
 
 @RestController
 @RequestMapping(value="/categorias")
@@ -41,6 +40,11 @@ public class CategoriaResource {
 	public ResponseEntity<Void> update(@RequestBody Categoria obj, @PathVariable Integer id){
 		obj.setId(id);
 		obj = service.update(obj);
+		return ResponseEntity.noContent().build();
+	}
+	@RequestMapping(value="/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<Void> delete(@PathVariable Integer id){
+		service.delete(id);
 		return ResponseEntity.noContent().build();
 	}
 }
